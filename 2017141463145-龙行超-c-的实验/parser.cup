@@ -1,0 +1,12 @@
+import java_cup.runtime.*;
+
+/**//* Preliminaries to set up and use the scanner.  */
+init with {: scanner.init();              :};
+scan with {: return getScanner().next_token(); :};
+
+/**//* Terminals (tokens returned by the scanner). */
+terminal           PROGRAM, PLUS, MINUS, TIMES, DIVIDE, MOD;
+terminal           UMINUS, LPAREN, RPAREN;
+
+/**//* Non-terminals */
+non terminal            expr_list, expr_part;

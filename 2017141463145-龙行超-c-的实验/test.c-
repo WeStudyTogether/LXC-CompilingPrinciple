@@ -1,0 +1,28 @@
+/*
+*下面这段代码旨在尝试词法分析器是否正确
+*
+*/
+void printSum(int a,int b);
+int main(int argc,char* argv[])
+{
+int a=0,b=0;
+printf("请输入两个整数。\n整数1:");//printf函数
+scanf("%d",&a);
+printf("\n整数2:");
+scanf("%d",&b);
+if(a>=b){
+printf("\n大于等于%d,小于等于%d的所有整数的和是%d",b,a);
+printSum(a,b);.
+}else
+{
+printf("\n大于等于%d,小于等于%d的所有整数的和是%d",a,b);
+printSum(b,a);
+}
+}
+void printSum(int a,int b)
+{
+int i=0,sum=0;
+for(i=b;i<=a;++i)
+sum+=i;
+printf("%d",sum);
+}

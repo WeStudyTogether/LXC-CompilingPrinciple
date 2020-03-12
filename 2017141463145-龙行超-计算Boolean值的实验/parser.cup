@@ -1,0 +1,42 @@
+import java_cup.runtime.*;
+
+/**//* Preliminaries to set up and use the scanner.  */
+init with {: scanner.init();              :};
+scan with {: return getScanner().next_token(); :};
+
+/**//* Terminals (tokens returned by the scanner). */
+terminal           SEMI, OR, AND, NOT;
+terminal           LBRACKETS, RBRACKETS;
+terminal Boolean   CONSTANT;
+
+/**//* Non-terminals */
+non terminal            bexpr, bterm, be;
+non terminal Boolean    bfactor;
+
+/**//* Precedences */
+precedence left OR, AND;
+precedence right NOT;
+
+/**//* The grammar */
+be ::= bexpr:b SEMI
+        {: System.out.println("=" + (Boolean) b); :}
+        | SEMI
+        {: :}
+        ;
+bexpr ::= bexpr:b1 OR bterm:b2
+        {: RESULT =  (Boolean) b1 || (Boolean) b2; :}
+        | bterm:b
+        {: RESULT = (Boolean) b; :}
+        ;
+bterm ::= bterm:b1 AND bfactor:b2 
+        {: RESULT = (Boolean) b1 && (Boolean) b2; :} 
+        | bfactor:b 
+        {: RESULT = (Boolean) b; :}
+        ;
+bfactor ::= NOT bfactor:b
+        {: RESULT = !(Boolean) b; :} 
+        | LBRACKETS bexpr:b RBRACKETS
+        {: RESULT = ((Boolean) b); :}
+        | CONSTANT:c 
+        {: RESULT = (Boolean) c; :}
+        ;
